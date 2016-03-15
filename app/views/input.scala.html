@@ -1,0 +1,23 @@
+@(implicit checkboxForm : Form[FormModel], model : FormModel)
+
+@import helper._
+
+@main("Checkbox example") {
+
+    @form(action = routes.Application.submitCheckBoxForm) {
+        @model.firstName<br/>
+        @model.lastName<br/>
+        @model.getData.getOrElse("Nothing")<br/>
+
+        Got back @checkboxForm("getData").value.getOrElse("false")
+        <hr/>
+        Firstname = <input type="text" name="@checkboxForm("firstName").name" value="@model.firstName"><br/>
+        Lastname = <input type="text" name="@checkboxForm("lastName").name" value="@model.lastName"><br/>
+        <input type="checkbox"
+        name="@checkboxForm("getData").name"
+        value="true"
+            @if(model.getData.getOrElse(false) == true){checked="checked"}> Box 1<br/>
+
+        <button type="submit">Post info</button>
+    }
+}
